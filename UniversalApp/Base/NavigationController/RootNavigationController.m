@@ -31,31 +31,23 @@
     [navBar setTintColor:CNavBgFontColor];
     [navBar setTitleTextAttributes:@{NSForegroundColorAttributeName :CNavBgFontColor, NSFontAttributeName : [UIFont systemFontOfSize:18]}];
     
-    //导航栏左右文字主题
-    UIBarButtonItem *barButtonItem = [UIBarButtonItem appearance];
-    
-    //    [barButtonItem setTitleTextAttributes:@{NSForegroundColorAttributeName : KWhiteColor, NSFontAttributeName : [UIFont systemFontOfSize:12]} forState:UIControlStateNormal];
-    
-    //    //tabBar主题 title文字属性
-    //    UITabBarItem *tabBarItem = [UITabBarItem appearance];
-    //    [tabBarItem setTitleTextAttributes:@{NSForegroundColorAttributeName : GRAYTEXTCOLOR} forState:UIControlStateNormal];
-    //    [tabBarItem setTitleTextAttributes:@{NSForegroundColorAttributeName : ButtonNormalColor} forState:UIControlStateSelected];
-    
+    [navBar setBackgroundImage:[UIImage imageWithColor:CNavBgColor] forBarPosition:UIBarPositionAny barMetrics:UIBarMetricsDefault];
+    [navBar setShadowImage:[UIImage new]];//去掉阴影线
 }
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.popDelegate = self.interactivePopGestureRecognizer.delegate;
     self.delegate = self;
-    //navigationBar样式设置
-    //    self.navigationBar.barTintColor = KBlueColor;
-    //    [self.navigationBar setTitleTextAttributes:@{NSForegroundColorAttributeName : KWhiteColor, NSFontAttributeName : [UIFont boldSystemFontOfSize:16]}];
-    //    [self.navigationBar setTintColor:KWhiteColor];    // Do any additional setup after loading the view.
     
+    //默认开启系统右划返回
     self.interactivePopGestureRecognizer.enabled = YES;
+    self.interactivePopGestureRecognizer.delegate = self;
+    
+    //只有在使用转场动画时，禁用系统手势，开启自定义右划手势
     _popRecognizer = [[UIScreenEdgePanGestureRecognizer alloc] initWithTarget:self action:@selector(handleNavigationTransition:)];
-    //    _popRecognizer = [[UIScreenEdgePanGestureRecognizer alloc] initWithTarget:self action:@selector(handleNavigationTransition:)];
-    //    _popRecognizer = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(handleNavigationTransition:)];
+    //下面是全屏返回
+    //        _popRecognizer = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(handleNavigationTransition:)];
     _popRecognizer.edges = UIRectEdgeLeft;
     [_popRecognizer setEnabled:NO];
     [self.view addGestureRecognizer:_popRecognizer];
@@ -64,11 +56,6 @@
 //解决手势失效问题
 - (void)navigationController:(UINavigationController *)navigationController didShowViewController:(UIViewController *)viewController animated:(BOOL)animated
 {
-    if (viewController == self.viewControllers[0]) {
-        self.interactivePopGestureRecognizer.delegate = self;
-    }else{
-        self.interactivePopGestureRecognizer.delegate = self;
-    }
     if (_isSystemSlidBack) {
         self.interactivePopGestureRecognizer.enabled = YES;
         [_popRecognizer setEnabled:NO];
@@ -76,6 +63,11 @@
         self.interactivePopGestureRecognizer.enabled = NO;
         [_popRecognizer setEnabled:YES];
     }
+}
+
+//根视图禁用右划返回
+-(BOOL)gestureRecognizerShouldBegin:(UIGestureRecognizer *)gestureRecognizer{
+    return self.childViewControllers.count == 1 ? NO : YES;
 }
 
 //push时隐藏tabbar
@@ -90,6 +82,10 @@
         
     }
     [super pushViewController:viewController animated:animated];
+    // 修改tabBra的frame
+    CGRect frame = self.tabBarController.tabBar.frame;
+    frame.origin.y = [UIScreen mainScreen].bounds.size.height - frame.size.height;
+    self.tabBarController.tabBar.frame = frame;
 }
 
 -(void)navigationController:(UINavigationController *)navigationController willShowViewController:(UIViewController *)viewController animated:(BOOL)animated{
@@ -253,18 +249,6 @@
     }
 }
 
-#pragma mark ————— 屏幕旋转 —————
-- (BOOL)shouldAutorotate
-{
-    //也可以用topViewController判断VC是否需要旋转
-    return self.topViewController.shouldAutorotate;
-}
-
-- (UIInterfaceOrientationMask)supportedInterfaceOrientations
-{
-    //也可以用topViewController判断VC支持的方向
-    return self.topViewController.supportedInterfaceOrientations;
-}
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
