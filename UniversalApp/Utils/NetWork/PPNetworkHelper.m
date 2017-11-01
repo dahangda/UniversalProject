@@ -77,13 +77,11 @@ static AFHTTPSessionManager *_sessionManager;
 + (void)openAES {
     _isOpenAES = YES;
     [_sessionManager.requestSerializer setValue:@"text/encode" forHTTPHeaderField:@"Content-Type"];
-    _sessionManager.responseSerializer = [AFHTTPResponseSerializer serializer];
 }
 
 + (void)closeAES {
     _isOpenAES = NO;
     [_sessionManager.requestSerializer setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
-    _sessionManager.responseSerializer = [AFJSONResponseSerializer serializer];
 }
 
 + (void)cancelAllRequest {
@@ -140,11 +138,8 @@ static AFHTTPSessionManager *_sessionManager;
     NSURLSessionTask *sessionTask = [_sessionManager GET:URL parameters:parameters progress:^(NSProgress * _Nonnull uploadProgress) {
         
     } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
-        
-        if (_isOpenAES) {
-            //解密
-            responseObject = aesDecryptWithData(responseObject);
-        }
+        //解密
+        responseObject = aesDecryptWithData(responseObject);
         
         if (_isOpenLog) {PPLog(@"responseObject = %@",[self jsonToString:responseObject]);}
         [[self allSessionTask] removeObject:task];
@@ -180,11 +175,8 @@ static AFHTTPSessionManager *_sessionManager;
         
     } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
 
-        if (_isOpenAES) {
-            //解密
-            responseObject = aesDecryptWithData(responseObject);
-        }
-        
+        //解密
+        responseObject = aesDecryptWithData(responseObject);
         
         if (_isOpenLog) {PPLog(@"responseObject = %@",[self jsonToString:responseObject]);}
         [[self allSessionTask] removeObject:task];
@@ -395,7 +387,7 @@ static AFHTTPSessionManager *_sessionManager;
     
     // 设置服务器返回结果的类型:JSON (AFJSONResponseSerializer,AFHTTPResponseSerializer)
 //    _sessionManager.responseSerializer = [AFJSONResponseSerializer serializer];
-//    _sessionManager.responseSerializer = [AFHTTPResponseSerializer serializer];
+    _sessionManager.responseSerializer = [AFHTTPResponseSerializer serializer];
     _sessionManager.responseSerializer.acceptableContentTypes = [NSSet setWithObjects:@"application/json", @"text/html", @"text/json", @"text/plain", @"text/javascript", @"text/xml", @"image/*",@"text/encode", nil];
     // 打开状态栏的等待菊花
     [AFNetworkActivityIndicatorManager sharedManager].enabled = YES;

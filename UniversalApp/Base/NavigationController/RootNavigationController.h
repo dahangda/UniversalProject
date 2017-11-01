@@ -7,10 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "RxWebViewNavigationViewController.h"
 /**
  导航控制器基类
  */
-@interface RootNavigationController : UINavigationController
+@interface RootNavigationController : RxWebViewNavigationViewController
 
 /*!
  *  返回到指定的类视图

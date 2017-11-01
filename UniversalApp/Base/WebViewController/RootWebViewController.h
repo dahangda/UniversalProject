@@ -4,13 +4,40 @@
 //
 //  Created by 徐阳 on 2017/5/18.
 //  Copyright © 2017年 徐阳. All rights reserved.
-//  webview 基类
+//
 
-#import "XLWebViewController.h"
+#import "RootViewController.h"
+//#import "RxWebViewController.h"
+/**
+ WebView 基类
+ */
+@interface RootWebViewController : RootViewController
+/**
+ *  origin url
+ */
+@property (nonatomic)NSString* url;
 
-@interface RootWebViewController : XLWebViewController
+/**
+ *  embed webView
+ */
+//@property (nonatomic)UIWebView* webView;
 
-//在多级跳转后，是否在返回按钮右侧展示关闭按钮
-@property(nonatomic,assign) BOOL isShowCloseBtn;
+/**
+ *  tint color of progress view
+ */
+@property (nonatomic)UIColor* progressViewColor;
+
+/**
+ *  get instance with url
+ *
+ *  @param url url
+ *
+ *  @return instance
+ */
+-(instancetype)initWithUrl:(NSString *)url;
+
+
+-(void)reloadWebView;
+
+
 @end
-

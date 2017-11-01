@@ -41,6 +41,10 @@
     return YES;
 }
 
+-(void)naviBtnClick:(UIButton *)btn{
+    [self goLoginWithPush];
+}
+
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.

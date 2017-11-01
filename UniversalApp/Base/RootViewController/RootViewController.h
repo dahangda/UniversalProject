@@ -24,6 +24,12 @@
 @property (nonatomic, strong) UICollectionView * collectionView;
 
 /**
+ 跳转登录
+ */
+- (void)goLogin;
+- (void)goLoginWithPush;
+
+/**
  *  显示没有数据页面
  */
 -(void)showNoDataImage;
@@ -32,6 +38,11 @@
  *  移除无数据页面
  */
 -(void)removeNoDataImage;
+
+/**
+ *  需要登录
+ */
+- (void)showShouldLoginPoint;
 
 /**
  *  加载视图

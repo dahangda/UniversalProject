@@ -1,32 +1,24 @@
-## 简介
-`UniversalProject`是基于MVC架构的iOS轻量级框架，封装了基类、基于猿题库YTKNetwork的网络服务、工具库，基于NavigationController的瀑布流/转场动画/粒子动画以及常用功能demo，已适配iOS11 & iPhone X。欢迎交流 & Star🌟 
+这是一个基于MVC设计的通用APP框架，封装了基类、网络服务和工具库，为快速搭建高性能APP而生，好用记得点🌟 
 
 原文传送门 http://www.jianshu.com/p/d553096914ff
 
-## 最近更新
-已对iOS11 & iPhone X 适配, 适配参考：[10分钟适配 iOS 11 & iPhone X](http://www.jianshu.com/p/94d3fdc0f20d)
-###### 欢迎各路大神小白加群  iOS 超级码农交流群：538549344
 
-## iOS 从0到1搭建高可用App框架
+
+
+# iOS 从0到1搭建高可用App框架
 
     最近在搭建新项目的iOS框架，一直在思考如何才能搭建出高可用App框架，能否避免后期因为代码质量问题的重构。
     以前接手过许多“烂代码”，架构松散，底层混乱，缺少规范，导致团队开发时代码风格迥异，
     清晰的项目结构和良好的代码规范是保证产品质量的关键，
     下面分享一下我的架构思路。
 
+架构图：
+![image](http://upload-images.jianshu.io/upload_images/743749-077e818f4b5f9f6e.png?imageMogr2/auto-orient/strip)
 
-## 效果图：
-
-<div align=center><img width="375" height="667" src="https://github.com/XuYang8026/UniversalProject/blob/master/Gif/demo.gif"/></div>
-
-
-## 架构图：
-
-<div align=center><img src="http://upload-images.jianshu.io/upload_images/743749-077e818f4b5f9f6e.png?imageMogr2/auto-orient/strip"/></div>
-
+架构图
 架构原则：易读性、易维护性、易扩展性。
 
-## 一、思考
+一、思考
 
 做好一件事，花在思考上的时间应该多于执行。
 
@@ -46,14 +38,14 @@
 
 程序猿长得可以保守，思想一定不能太保守。
 
-## 二、搭建目录结构
+二、搭建目录结构
 
 ![image](http://upload-images.jianshu.io/upload_images/743749-5eec25e5a69c7138.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
 
 目录图解
 如上图，我是这样搭建App目录结构的，从下到上，使用Pods管理第三方框架，将第三方框架进行二次封装，供给顶层使用，尽可能减少各模块之间的耦合度，只为更清晰。
 
-## 三、封装基础类
+三、封装基础类
 
 ![image](http://upload-images.jianshu.io/upload_images/743749-f88f1bf3414b0d65.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
 
@@ -119,13 +111,7 @@ ThirdMacros 包含第三方框架相关的定义，例如keySecret等。只为�
 
 欢迎各路大神提出更好的架构思想大家一起学习交流
 
-## 下面对你也许有帮助：
-
-[Xcode 9 快速跳转到定义新姿势（Jump to Definition）](http://www.jianshu.com/p/9c81e9de272b)
-
-[适配iOS11 - UITableview UICollectionView MJRefresh下拉刷新错乱](http://www.jianshu.com/p/a6e5cc20a008)
-
-[10分钟适配 iOS 11 & iPhone X](http://www.jianshu.com/p/94d3fdc0f20d)
+下面对你也许有帮助：
 
 [iOS 团队编码规范 —— 团队开发需要共同遵守的代码规范](http://www.jianshu.com/p/1f0618a2ba9b)
 
