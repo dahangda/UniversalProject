@@ -77,7 +77,7 @@
         if ([viewController conformsToProtocol:@protocol(XYTransitionProtocol)] && [self isNeedTransition:viewController]) {
             viewController.hidesBottomBarWhenPushed = NO;
         }else{
-            viewController.hidesBottomBarWhenPushed = YES;
+          
         }
         
     }
